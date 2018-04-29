@@ -5323,7 +5323,7 @@ mini_init (const char *filename, const char *runtime_version)
 
 	MONO_PROBE_VES_INIT_BEGIN ();
 	
-#ifdef RIMWORLD
+//#ifdef RIMWORLD
    {
       char *options_debug = getenv("DNSPY_UNITY_DBG");
       if (options_debug)
@@ -5336,7 +5336,7 @@ mini_init (const char *filename, const char *runtime_version)
          mono_debug_init(MONO_DEBUG_FORMAT_MONO);
       }
    }
-#endif
+//#endif
 
 #ifdef __linux__
 	if (access ("/proc/self/maps", F_OK) != 0) {

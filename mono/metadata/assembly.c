@@ -1453,7 +1453,7 @@ mono_assembly_open (const char *filename, MonoImageOpenStatus *status)
 }
 
 //RIMWORLD
-#ifdef RIMWORLD
+//#ifdef RIMWORLD
 static gchar *
 find_file_in_dir(const gchar *path, const gchar *fileName)
 {
@@ -1481,7 +1481,7 @@ find_file_in_dir(const gchar *path, const gchar *fileName)
    return NULL;
 
 }
-#endif
+//#endif
 
 MonoAssembly *
 mono_assembly_load_from_full (MonoImage *image, const char*fname, 
@@ -1497,7 +1497,7 @@ mono_assembly_load_from_full (MonoImage *image, const char*fname,
 		return NULL;
 	}
 	
-#ifdef RIMWORLD
+//#ifdef RIMWORLD
    if (*fname == '\0')
    {
       gchar *cwd = g_get_current_dir();
@@ -1513,7 +1513,7 @@ mono_assembly_load_from_full (MonoImage *image, const char*fname,
       g_free(cwd);
       g_free(mod_dir);
    }
-#endif
+//#endif
 
 #if defined (PLATFORM_WIN32)
 	{
