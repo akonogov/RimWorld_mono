@@ -5325,7 +5325,7 @@ mini_init (const char *filename, const char *runtime_version)
 	
 //#ifdef RIMWORLD
    {
-      char *options_debug = getenv("DNSPY_UNITY_DBG");
+      char *options_debug = getenv("RIMWORLD_MOD_DEBUG");
       if (options_debug)
       {
          const char* options[] =
