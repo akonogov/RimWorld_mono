@@ -2587,5 +2587,6 @@ class Tests {
 		catch {}
 		return (int)value;
 	}
+
 }
 

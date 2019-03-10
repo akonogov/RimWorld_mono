@@ -823,6 +823,8 @@ mono_debugger_agent_init (void)
 	mono_profiler_install_jit_end (jit_end);
 	mono_profiler_install_method_invoke (start_runtime_invoke, end_runtime_invoke);
 
+
+
 	debugger_tls_id = TlsAlloc ();
 
 	thread_to_tls = mono_g_hash_table_new (NULL, NULL);
@@ -3228,6 +3230,7 @@ thread_end (MonoProfiler *prof, gsize tid)
 	}
 }
 
+
 static void
 appdomain_load (MonoProfiler *prof, MonoDomain *domain, int result)
 {
@@ -4462,7 +4465,10 @@ ss_create (MonoInternalThread *thread, StepSize size, StepDepth depth, EventRequ
 		if (frame->il_offset != -1) {
 			/* FIXME: Sort the table and use a binary search */
 			sp = find_seq_point (frame->domain, frame->method, frame->il_offset, &info);
-			if (!sp) return ERR_NOT_IMPLEMENTED; // This can happen with exceptions when stepping
+			if (!sp) {
+				ss_destroy (ss_req);
+				return ERR_NOT_IMPLEMENTED; // This can happen with exceptions when stepping
+			}
 			method = frame->method;
 		}
 	}
@@ -5457,6 +5463,8 @@ vm_commands (int command, int id, guint8 *p, guint8 *end, Buffer *buf)
 		resume_vm ();
 		break;
 	case CMD_VM_DISPOSE:
+		suspend_vm ();
+		wait_for_suspend ();
 		/* Clear all event requests */
 		mono_loader_lock ();
 		while (event_requests->len > 0) {
@@ -6756,7 +6764,8 @@ thread_commands (int command, guint8 *p, guint8 *end, Buffer *buf)
 		mono_loader_lock ();
 		tls = mono_g_hash_table_lookup (thread_to_tls, thread);
 		mono_loader_unlock ();
-		g_assert (tls);
+		if (!tls)
+			return ERR_INVALID_ARGUMENT;
 
 		compute_frame_info (thread, tls);
 

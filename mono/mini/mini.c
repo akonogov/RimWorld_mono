@@ -5322,7 +5322,7 @@ mini_init (const char *filename, const char *runtime_version)
 	MonoRuntimeCallbacks callbacks;
 
 	MONO_PROBE_VES_INIT_BEGIN ();
-	
+
 //#ifdef RIMWORLD
    {
       char *options_debug = getenv("RIMWORLD_MOD_DEBUG");
