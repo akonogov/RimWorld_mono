@@ -1,8 +1,9 @@
-# Rimworld B18 - Mono Debug
+# Update for Rimworld 1.0 - Mono Debug
 
 ### credits
    - https://github.com/0xd4d
    - https://github.com/olizit
+   - https://github.com/bananasss00
 
 ### Precompiled dll
    DLL compiled with MS VC++ 2010 in Release_eglib
